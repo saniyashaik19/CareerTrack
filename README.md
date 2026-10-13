@@ -113,4 +113,12 @@
 **- Add email notifications for application updates.**
 
 **- Improve dashboard analytics.**
+## Screenshots
+
+### Login Page
+![CareerTrack Login Page](screenshots/login.png)
+
+### Dashboard
+![CareerTrack Dashboard](screenshots/dashboard.png)
+
 
