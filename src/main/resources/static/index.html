@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CareerTrack | Job Application Tracker</title>
+<style>
+* {
+	box-sizing: border-box
+}
+
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background: #f4f6fb;
+	color: #1f2937
+}
+
+header {
+	background: #172554;
+	color: white;
+	padding: 22px max(20px, calc(( 100% - 1100px)/2));
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px
+}
+
+header h1 {
+	margin: 0
+}
+
+header p {
+	margin: 7px 0 0;
+	color: #cbd5e1
+}
+
+main {
+	max-width: 1100px;
+	margin: 30px auto;
+	padding: 0 20px
+}
+
+.hidden {
+	display: none !important
+}
+
+.auth {
+	max-width: 460px;
+	margin: 45px auto;
+	background: white;
+	padding: 28px;
+	border-radius: 14px;
+	border: 1px solid #e5e7eb
+}
+
+.tabs, .top-actions {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	flex-wrap: wrap
+}
+
+.tabs button {
+	flex: 1
+}
+
+h2 {
+	margin-top: 0
+}
+
+.group {
+	margin-bottom: 15px
+}
+
+label {
+	display: block;
+	margin-bottom: 6px;
+	font-weight: 600
+}
+
+input, select {
+	font: inherit
+}
+
+.control {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #cbd5e1;
+	border-radius: 7px;
+	background: white
+}
+
+.btn {
+	padding: 11px 16px;
+	border: 0;
+	border-radius: 7px;
+	cursor: pointer;
+	margin: 3px 2px
+}
+
+.primary {
+	background: #172554;
+	color: white
+}
+
+.secondary {
+	background: white;
+	border: 1px solid #cbd5e1;
+	color: #1f2937
+}
+
+.edit {
+	background: #dbeafe;
+	color: #1d4ed8
+}
+
+.delete {
+	background: #fee2e2;
+	color: #b91c1c
+}
+
+.message {
+	line-height: 1.5;
+	overflow-wrap: anywhere
+}
+
+.success {
+	color: #15803d
+}
+
+.error {
+	color: #b91c1c
+}
+
+.cards {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 18px
+}
+
+.card, .panel {
+	background: white;
+	padding: 22px;
+	border: 1px solid #e5e7eb;
+	border-radius: 12px;
+	box-shadow: 0 3px 12px #00000008
+}
+
+.card p {
+    color: #64748b;
+    margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.card h3 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+    color: #172554;
+}
+
+.panel {
+	margin-top: 26px
+}
+
+.controls {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 20px 0
+}
+
+.controls input {
+	flex: 1;
+	min-width: 200px
+}
+
+.controls input, .controls select {
+	padding: 12px;
+	border: 1px solid #cbd5e1;
+	border-radius: 7px
+}
+
+.table-wrap {
+	overflow-x: auto
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 650px
+}
+
+th {
+	text-align: left;
+	padding: 12px;
+	background: #f8fafc
+}
+
+td {
+	padding: 12px;
+	border-top: 1px solid #e5e7eb
+}
+
+.badge {
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: bold
+}
+
+.applied {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.interview {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.rejected {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+@media ( max-width :700px) {
+	header {
+		padding: 20px
+	}
+	.cards {
+		grid-template-columns: repeat(2, 1fr)
+	}
+	.panel {
+		padding: 16px
+	}
+}
+
+@media ( max-width :400px) {
+	.cards {
+		grid-template-columns: 1fr
+	}
+	.auth {
+		padding: 20px;
+		margin: 24px 8px
+	}
+}
+/* CareerTrack UI improvements */
+body {
+    background: #f1f5f9;
+    color: #0f172a;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #172554, #2563eb);
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+}
+
+.card, .panel {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.09);
+}
+
+.btn {
+    font-weight: 600;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.control:focus,
+.controls input:focus,
+.controls select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+th {
+    color: #334155;
+    letter-spacing: 0.3px;
+}
+
+td {
+    vertical-align: middle;
+}
+
+.badge {
+    padding: 6px 12px;
+    letter-spacing: 0.2px;
+}
+/* Application table improvements */
+thead th {
+    padding: 15px 14px;
+    background: #f1f5f9;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+tbody td {
+    padding: 15px 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+/* Search and filter improvements */
+.controls {
+    gap: 12px;
+    margin: 24px 0;
+    align-items: center;
+}
+
+.controls input,
+.controls select {
+    min-height: 44px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #1e293b;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.controls input::placeholder {
+    color: #94a3b8;
+}
+
+.controls input:focus,
+.controls select:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+/* Responsive layout improvements */
+@media (max-width: 768px) {
+    main {
+        margin: 20px auto;
+        padding: 0 14px;
+    }
+
+    header {
+        flex-wrap: wrap;
+        padding: 18px 14px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .card h3 {
+        font-size: 28px;
+    }
+
+    .panel {
+        padding: 16px;
+        margin-top: 18px;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .controls input,
+    .controls select,
+    .controls button {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .card h3 {
+        font-size: 26px;
+    }
+}
+/* Improve application table on mobile */
+@media (max-width: 768px) {
+    .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+    }
+
+    table {
+        min-width: 650px;
+    }
+
+    .table-wrap::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .table-wrap::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+    }
+
+    .table-wrap::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+}
+
+
+</style>
+</head>
+<body>
+	<header>
+		<div>
+			<h1>CareerTrack</h1>
+			<p>Your personal job application tracker</p>
+		</div>
+		<div id="headerActions" class="top-actions hidden">
+			<span id="userLabel"></span>
+			<button id="logout" class="btn secondary">Log out</button>
+		</div>
+	</header>
+	<main>
+		<section id="auth" class="auth">
+			<div class="tabs">
+				<button id="loginTab" class="btn primary" type="button">Log
+					in</button>
+				<button id="registerTab" class="btn secondary" type="button">Create
+					account</button>
+			</div>
+			<form id="loginForm">
+				<h2>Welcome back</h2>
+				<p>Log in to manage your job applications.</p>
+				<div class="group">
+					<label for="loginEmail">Email</label><input class="control"
+						id="loginEmail" type="email" autocomplete="username" required>
+				</div>
+				<div class="group">
+					<label for="loginPassword">Password</label><input class="control"
+						id="loginPassword" type="password" autocomplete="current-password"
+						required>
+				</div>
+				<button class="btn primary">Log in</button>
+				<p id="loginMessage" class="message" role="status"></p>
+			</form>
+			<form id="registerForm" class="hidden">
+				<h2>Create your account</h2>
+				<div class="group">
+					<label for="regName">Full name</label><input class="control"
+						id="regName" required>
+				</div>
+				<div class="group">
+					<label for="regEmail">Email</label><input class="control"
+						id="regEmail" type="email" required>
+				</div>
+				<div class="group">
+					<label for="regPassword">Password</label><input class="control"
+						id="regPassword" type="password" minlength="8" required><small>Use
+						at least 8 characters.</small>
+				</div>
+				<button class="btn primary">Create account</button>
+				<p id="registerMessage" class="message" role="status"></p>
+			</form>
+		</section>
+		<section id="dashboard" class="hidden">
+			<div style="margin-bottom: 24px">
+				<h2 id="welcome">Your dashboard</h2>
+				<p>Keep track of your job applications in one place.</p>
+			</div>
+			<div class="cards">
+				<div class="card">
+					<p>Total Applications</p>
+					<h3 id="total">0</h3>
+				</div>
+				<div class="card">
+					<p>Applied</p>
+					<h3 id="appliedCount">0</h3>
+				</div>
+				<div class="card">
+					<p>Interviews</p>
+					<h3 id="interviewCount">0</h3>
+				</div>
+				<div class="card">
+					<p>Rejected</p>
+					<h3 id="rejectedCount">0</h3>
+				</div>
+			</div>
+			<section class="panel">
+				<h2 id="formTitle">Add New Application</h2>
+				<form id="appForm">
+					<div class="group">
+						<label for="company">Company Name</label><input class="control"
+							id="company" placeholder="e.g. Infosys" required>
+					</div>
+					<div class="group">
+						<label for="role">Job Role</label><input class="control" id="role"
+							placeholder="e.g. Java Developer" required>
+					</div>
+					<div class="group">
+						<label for="status">Application Status</label><select
+							class="control" id="status"><option>Applied</option>
+							<option>Interview</option>
+							<option>Rejected</option></select>
+					</div>
+					<div class="group">
+						<label for="date">Application Date</label><input class="control"
+							id="date" type="date">
+					</div>
+					<button class="btn primary" id="saveApp">Add Application</button>
+					<button class="btn secondary hidden" id="cancelEdit" type="button">Cancel
+						edit</button>
+					<p id="appMessage" class="message" role="status"></p>
+				</form>
+			</section>
+			<section class="panel">
+				<h2>Your Applications</h2>
+				<div class="controls">
+					<input id="search" placeholder="Search by company name..."><select
+						id="filter"><option value="All">All Statuses</option>
+						<option>Applied</option>
+						<option>Interview</option>
+						<option>Rejected</option></select>
+					<button id="searchBtn" class="btn primary" type="button">Search</button>
+					<button id="resetBtn" class="btn secondary" type="button">Show
+						All</button>
+				</div>
+				<div class="table-wrap">
+					<table>
+						<thead>
+							<tr>
+								<th>Company</th>
+								<th>Job Role</th>
+								<th>Status</th>
+								<th>Application Date</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody id="rows">
+							<tr>
+								<td colspan="5">Log in to view applications.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+		</section>
+	</main>
+	<script>
+let apps=[], editingId=null;
+const $=id=>document.getElementById(id);
+function msg(id,text,type=''){ $(id).textContent=text; $(id).className='message '+type; }
+function showAuth(){ $('auth').classList.remove('hidden');$('dashboard').classList.add('hidden');$('headerActions').classList.add('hidden'); }
+function showDash(name){ $('auth').classList.add('hidden');$('dashboard').classList.remove('hidden');$('headerActions').classList.remove('hidden');$('userLabel').textContent='Hi, '+(name||'there');$('welcome').textContent='Welcome, '+(name||'back')+'!'; }
+function authTab(register){ $('loginForm').classList.toggle('hidden',register);$('registerForm').classList.toggle('hidden',!register);$('loginTab').className='btn '+(register?'secondary':'primary');$('registerTab').className='btn '+(register?'primary':'secondary'); }
+async function api(url,opts={}){opts.credentials='same-origin';let r=await fetch(url,opts);if(r.status===401){showAuth();throw Error('Session expired. Please log in again.');}return r;}
+$('loginTab').onclick=()=>authTab(false);$('registerTab').onclick=()=>authTab(true);
+$('registerForm').onsubmit=async e=>{e.preventDefault();msg('registerMessage','Creating account...');try{let r=await fetch('/auth/register',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:$('regName').value.trim(),email:$('regEmail').value.trim(),password:$('regPassword').value})});let d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.message||d.error||'Registration failed.');$('registerForm').reset();authTab(false);$('loginEmail').value=d.email||'';msg('loginMessage','Account created. Please log in.','success');}catch(x){msg('registerMessage',x.message,'error');}};
+$('loginForm').onsubmit=async e=>{e.preventDefault();msg('loginMessage','Logging in...');try{let r=await fetch('/auth/login',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:$('loginEmail').value.trim(),password:$('loginPassword').value})});let d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.message||d.error||'Login failed.');$('loginForm').reset();showDash(d.name);await refresh();}catch(x){msg('loginMessage',x.message,'error');}};
+$('logout').onclick=async()=>{try{await fetch('/auth/logout',{method:'POST',credentials:'same-origin'});}finally{apps=[];showAuth();authTab(false);msg('loginMessage','You have been logged out.','success');}};
+async function refresh(){await Promise.all([loadStats(),loadApps()]);}
+async function loadStats(){let r=await api('/applications/stats');if(!r.ok)throw Error('Could not load stats');let s=await r.json();$('total').textContent=s.total||0;$('appliedCount').textContent=s.applied||0;$('interviewCount').textContent=s.interview||0;$('rejectedCount').textContent=s.rejected||0;}
+async function loadApps(){try{let r=await api('/applications');if(!r.ok)throw Error('Could not load applications');apps=await r.json();filterApps();}catch(e){if(!$('dashboard').classList.contains('hidden'))$('rows').innerHTML='<tr><td colspan="5">Could not load applications. Please log in again.</td></tr>';console.error(e);}}
+function filterApps(){let q=$('search').value.trim().toLowerCase(),s=$('filter').value;render(apps.filter(a=>(a.companyName||'').toLowerCase().includes(q)&&(s==='All'||a.status===s)));}
+function render(list){$('rows').innerHTML='';if(!list.length){$('rows').innerHTML='<tr><td colspan="5">No applications found.</td></tr>';return;}list.forEach(a=>{let tr=document.createElement('tr');[a.companyName,a.jobRole,a.status,a.applicationDate||'-'].forEach((v,i)=>{let td=document.createElement('td');if(i===2){let b=document.createElement('span');b.textContent=v;b.className='badge '+(v==='Applied'?'applied':v==='Interview'?'interview':v==='Rejected'?'rejected':'');td.appendChild(b);}else td.textContent=v||'';tr.appendChild(td);});let td=document.createElement('td'),ed=document.createElement('button'),del=document.createElement('button');ed.className='btn edit';ed.textContent='Edit';ed.onclick=()=>beginEdit(a);del.className='btn delete';del.textContent='Delete';del.onclick=()=>removeApp(a.id);td.append(ed,del);tr.appendChild(td);$('rows').appendChild(tr);});}
+function beginEdit(a){editingId=a.id;$('formTitle').textContent='Edit Application';$('company').value=a.companyName||'';$('role').value=a.jobRole||'';$('status').value=a.status||'Applied';$('date').value=a.applicationDate||'';$('saveApp').textContent='Save Changes';$('cancelEdit').classList.remove('hidden');$('formTitle').scrollIntoView({behavior:'smooth'});}
+function resetForm(){editingId=null;$('appForm').reset();$('formTitle').textContent='Add New Application';$('saveApp').textContent='Add Application';$('cancelEdit').classList.add('hidden');}
+$('cancelEdit').onclick=()=>{resetForm();msg('appMessage','');};
+$('appForm').onsubmit=async e=>{e.preventDefault();let body={companyName:$('company').value.trim(),jobRole:$('role').value.trim(),status:$('status').value,applicationDate:$('date').value||null};try{let r=await api(editingId===null?'/applications':'/applications/'+editingId,{method:editingId===null?'POST':'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw Error(await r.text()||'Could not save application');msg('appMessage',editingId===null?'Application added successfully.':'Application updated successfully.','success');resetForm();await refresh();}catch(x){msg('appMessage',x.message,'error');}};
+async function removeApp(id){if(!confirm('Are you sure you want to delete this application?'))return;try{let r=await api('/applications/'+id,{method:'DELETE'});if(!r.ok)throw Error(r.status===404?'Application not found.':'Delete failed.');msg('appMessage','Application deleted successfully.','success');await refresh();}catch(x){msg('appMessage',x.message,'error');}}
+$('searchBtn').onclick=filterApps;$('filter').onchange=filterApps;$('search').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();filterApps();}};$('resetBtn').onclick=()=>{$('search').value='';$('filter').value='All';filterApps();};
+showAuth();
+</script>
+</body>
+</html>
